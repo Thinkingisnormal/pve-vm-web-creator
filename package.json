@@ -1,0 +1,16 @@
+{
+  "name": "vm-web-creator",
+  "version": "1.0.0",
+  "description": "website that creates vm through website and distributes on browser via VNC",
+  "keywords": [
+    "proxmox",
+    "server"
+  ],
+  "license": "ISC",
+  "author": "diel dingle",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "print(\"WIENER\")"
+  }
+}
