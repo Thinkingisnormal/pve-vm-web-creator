@@ -12,5 +12,9 @@
   "main": "index.js",
   "scripts": {
     "test": "print(\"WIENER\")"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.11"
   }
+
 }
