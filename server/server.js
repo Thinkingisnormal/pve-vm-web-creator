@@ -16,6 +16,8 @@ import { fileURLToPath } from 'url';
 import path from 'path';
 const app = express();
 
+global.vmcount = 0;
+
 
 
 // Required to get __dirname in ES modules
@@ -49,11 +51,12 @@ app.get('/ping', (req, res) => {
     res.json({ message: "Hello from server!" });
 });
 
+
 // import { create } from '/opt/server/server/vm-scripts/vm-creation.js';
 import { create } from './vm-scripts/vm-creation.js';
 app.get('/createvnc', async (_, res) => {
-  const url = await create().catch(console.error);
-
+  global.vmcount = global.vmcount + 1;
+  const url = await create(300 + global.vmcount).catch(console.error);
   console.log(url);
   res.json({url:url})
 });
