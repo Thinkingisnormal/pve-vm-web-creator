@@ -76,6 +76,9 @@ export async function create(nVMID) {
     // Establish the VNC WebSocket connection -AI agent
     const vncwebsocket = await pve.nodes.$(targetNode).qemu.$(nVMID).vncwebsocket.$get({node: targetNode, vncticket: vncTicket, port: vncPort, vmid: nVMID});
 
+    console.log("using novnc_proxy to open a proxy...");
+    
+    
     // Write VNC certificate to a temporary file -AI agent
     exec(`echo "${vncCert}" > /tmp/cert-${nVMID}.pem`)
     // Launch noVNC proxy to bridge VNC and WebSocket connections 

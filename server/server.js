@@ -58,5 +58,10 @@ app.get('/createvnc', async (_, res) => {
   global.vmcount = global.vmcount + 1;
   const url = await create(300 + global.vmcount).catch(console.error);
   console.log(url);
-  res.json({url:url})
+  res.json({ url });
+});
+
+//whenever the proxmox API returns an error (usually because the VMID is taken) it will redirect to here
+app.get('/undefined', (req, res) => {
+    res.json({ message: "uh oh! tell diel that you got undefined. Proabably because a VMID is taken..." });
 });

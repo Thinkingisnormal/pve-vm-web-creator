@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>Virtual Machine Generation Page</h2>
+<p>Directions:</p>
+<p>- press the button</p>
+<p>- wait for 10 ish seconds. (there are no visual queues)</p>
+<p>- boom shakalaka you got a vm</p>
+<p>REMEMBER: </p>
+<p>- do not refresh the page! You won't be able to get back into your VM.</p>
+<p>- please do not spam the creation page. this will overwelm the servers and i will be sad :(</p>
+<div>- All VM's will be deleted by the end of our session.</div>
+
+
+
+<button onclick="myFunction()">generate vm</button>
+
+<script>
+  var tries = 0;
+//VERY VULNERABLE TO CLIENT SIDE TAMPERING. DO NOT BE DOING THIS. 
+async function myFunction() {
+    if (tries <1){
+        tries = tries + 1;
+        try {
+        const response = await fetch("http://192.168.1.51:10477/createvnc");
+        const data = await response.json();
+        console.log(data.url);
+        window.location.replace(data.url);
+    } catch (error) {
+        console.error('Error:', error);
+    }
+}
+}
+</script>
+
+</body>
+</html> 
