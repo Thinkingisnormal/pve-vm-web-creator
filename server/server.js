@@ -74,12 +74,15 @@ if (global.vmcount < 7) {
 	  res.json({ url });
 	  console.log(`Total vm count: ${global.vmcount}`)
 	}
-else {
+else if (global.vmcount < 13) {
 	const url = await create(300 + global.vmcount, foxtrot.name, foxtrot.ip, foxtrot.cloneid).catch(console.error);
 	console.log(url);
 	res.json({url});
 	console.log(`Total vm count: ${global.vmcount} (switched to ${foxtrot.name})`)
 	}
+else {
+	res.json({message: `uh oh! looks like the VM count has reached its limit (${VMlimit} VMs) please tell us.`})
+}
 });
 
 //whenever the proxmox API returns an error (usually because the VMID is taken) it will redirect to here
