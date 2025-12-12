@@ -16,13 +16,6 @@ import proxmoxApi from 'proxmox-api';
 import { exec } from 'child_process';
 
 
-// ID of the template VM to clone from -AI agent
-const VMTEMPLATE = 101;
-
-const targetNode = "sierra"
-
-// IP address of the Proxmox host server -AI agent
-const targetIP = "192.168.1.4"
 
 // Utility function to introduce delays in async code to wait for VM initialization -AI agent
 function delay(time) {
@@ -30,9 +23,9 @@ function delay(time) {
 } 
 
 
-export async function create(nVMID) {  
+export async function create(nVMID, targetNode, targetIP, VMTEMPLATE) {  
     // Initialize connection to Proxmox API -AI agent
-    const pve = proxmoxApi({host: targetIP, tokenID: "root@pam!test", tokenSecret:"4fd6bbdc-2333-4194-aa25-56317d0c67be", port: 8006})
+    const pve = proxmoxApi({host: targetIP, tokenID: "root@pam!test", tokenSecret:"191eca3e-7b85-443f-b381-e6356df1f054", port: 8006})
     
     // Extract numeric portion of the VMID for use in clone naming -AI agent
     var cloneID = nVMID.toString().slice(1,nVMID.length);
@@ -92,7 +85,7 @@ export async function create(nVMID) {
     });
 
     // Construct and return the VNC access URL with authentication -AI agent
-    var url = `http://192.168.1.51:17${cloneID}/vnc.html?autoconnect=1&reconnect=1#password=${encodeURI(vncPassword)}`
+    var url = `http://10.0.0.10:17${cloneID}/vnc.html?autoconnect=1&reconnect=1#password=${encodeURI(vncPassword)}`
     return url;
 }
 

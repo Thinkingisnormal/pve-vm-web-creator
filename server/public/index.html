@@ -23,7 +23,7 @@ async function myFunction() {
     if (tries <1){
         tries = tries + 1;
         try {
-        const response = await fetch("http://192.168.1.51:10477/createvnc");
+        const response = await fetch("http://10.0.0.10:10477/createvnc");
         const data = await response.json();
         console.log(data.url);
         window.location.replace(data.url);
