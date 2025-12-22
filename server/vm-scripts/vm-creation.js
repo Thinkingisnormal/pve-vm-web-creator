@@ -25,7 +25,7 @@ function delay(time) {
 
 export async function create(nVMID, targetNode, targetIP, VMTEMPLATE) {  
     // Initialize connection to Proxmox API -AI agent
-    const pve = proxmoxApi({host: targetIP, tokenID: "root@pam!test", tokenSecret:"191eca3e-7b85-443f-b381-e6356df1f054", port: 8006})
+    const pve = proxmoxApi({host: targetIP, tokenID: process.env.PVEUSER, tokenSecret: process.env.PVETOKEN, port: 8006})
     
     // Extract numeric portion of the VMID for use in clone naming -AI agent
     var cloneID = nVMID.toString().slice(1,nVMID.length);
