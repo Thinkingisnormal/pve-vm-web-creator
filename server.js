@@ -13,23 +13,10 @@
 import express from 'express';
 import cors from 'cors';
 import { fileURLToPath } from 'url';
-import path from 'path';
+import path from 'path';	
+import slist from './serverconf.json' assert {type: "json"} // requires the json of servers..
 const app = express();
 
-
-//declaring our servers
-global.vmcount = 0; //how many VMs we have made through the web app.
-// to call within our dictionary, we do `[name].[pair]`
-const charlie = {
-	"name": "charlie",
-	"ip": "10.0.0.3",
-	"cloneid": "1001"
-}
-const foxtrot = {
-	"name": "foxtrot",
-	"ip": "10.0.0.2",
-	"cloneid": "1000"
-}
 
 // Required to get __dirname in ES modules
 const __filename = fileURLToPath(import.meta.url);
@@ -40,6 +27,11 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(cors());
 app.use(express.json());
+
+
+global.vmcount = 0; //how many VMs we have made through the web app.
+
+
 
 
 //start server
@@ -66,16 +58,17 @@ app.get('/ping', (req, res) => {
 //create(VMID,targetNode,targetIP,VMTEMPLATE)
 
 import { create } from './vm-scripts/vm-creation.js';
+import { assert } from 'console';
 app.get('/createvnc', async (_, res) => {
   global.vmcount = global.vmcount + 1;
 if (global.vmcount < 7) {
-	  const url = await create(300 + global.vmcount, charlie.name, charlie.ip,charlie.cloneid).catch(console.error);
+	  const url = await create(300 + global.vmcount, slist[1].name, slist[1].ip,slist[1].cloneid).catch(console.error);
 	  console.log(url);
 	  res.json({ url });
 	  console.log(`Total vm count: ${global.vmcount}`)
 	}
 else if (global.vmcount < 13) {
-	const url = await create(300 + global.vmcount, foxtrot.name, foxtrot.ip, foxtrot.cloneid).catch(console.error);
+	const url = await create(300 + global.vmcount, slist[2].name, slist[2].ip, slist[2].cloneid).catch(console.error);
 	console.log(url);
 	res.json({url});
 	console.log(`Total vm count: ${global.vmcount} (switched to ${foxtrot.name})`)

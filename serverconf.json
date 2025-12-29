@@ -1,0 +1,13 @@
+//test
+{
+    "1": {
+        "name": "charlie",
+        "ip": "10.0.0.3",
+        "cloneid": "1001"
+    },
+    "2": {
+        "name": "foxtrot",
+        "ip": "10.0.0.2",
+        "cloneid": "1000"
+    }
+}
